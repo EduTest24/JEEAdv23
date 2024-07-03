@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JEE Main Test</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="body">
+    <div class="main">
+      <header>
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7yRXLuUcLhDtmRdqTmP78DsvZ67myq3IkW5lnb8oWdYoEEeqvVjpG1T2LuE521oqJZNRdKuKNzepzxS3o7ktjFiaHgv-gnDKQlmDrSeRKHcx-JjAwCskUiSfarNZ2HTrgKVsM9atqmpljjkXDJmohHALKv3daMTJ8b0pqscnzX0wOCsIw-m6YbIU7J9U/s320/ic_content_exam_jee_advanced.png"
+          alt=""
+        />
+        <h1>JEE Advanced</h1>
+      </header>
+      <div class="main-container">
+        <div class="left-side">
+          <p class="welcome-text">Welcome to the <strong>EduVerse</strong></p>
+          <p class="sub-text"></p>
+          <input
+            type="text"
+            name="userName"
+            placeholder="Enter Name"
+            id="userName"
+            oninput="validateInput()"
+            required
+            style="width: fit-content"
+          />
+          <button class="start-test-btn">
+            <i class="fas fa-play"></i> Start Test
+          </button>
+        </div>
+        <div class="right-side">
+          <img
+            src="https://topsoft4u.com/_next/static/media/page-estimate.1ece00dd.svg"
+            alt="Welcome Image"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="popup-info">
+      <h2></h2>
+      <ol type="1">
+        <li>
+          <span class="info"
+            ><b>Subject</b>: Physics, Chemistry 🧪 and Mathematics
+          </span>
+        </li>
+        <li>
+          <span class="info"><b>Duration</b>: 3 hours </span>
+        </li>
+        <li>
+          <span class="info"><b>Total Marks</b>: 180 </span>
+        </li>
+        <li>
+          <span class="info"><b>Sections</b>: </span>
+          <ol type="6.1">
+            <li>
+              <span class="info"
+                ><b>Section I</b>: Multiple Correct Questions (3 Questions per
+                Subject)
+              </span>
+            </li>
+            <li>
+              <span class="info"
+                ><b>Section II</b>: Single Correct Questions (4 Questions per
+                Subject)
+              </span>
+            </li>
+            <li>
+              <span class="info"
+                ><b>Section III</b>: Numerical (6 Questions per Subject)
+              </span>
+            </li>
+            <li>
+              <span class="info"
+                ><b>Section IV</b>: Single Correct Questions (4 Questions per
+                Subject)
+              </span>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="btn-group">
+        <button class="info-btn exit-btn">Exit Quiz</button>
+        <a href="#" class="info-btn continue-btn" onclick="confirmStartTest()"
+          >Continue</a
+        >
+      </div>
+    </div>
+
+    <!-- Test Starts from Here -->
+    <div id="test-container" style="display: none">
+      <div id="header">
+        <div class="box">
+          <button id="fullscreen-btn" onclick="fullscreen()">
+            <i class="fas fa-expand" style="color: white"></i>
+          </button>
+          <div class="bText">Full Screen</div>
+        </div>
+        <div class="box">
+          <button id="toggleQuestionsBtn" onclick="toggleQuestions()">
+            <i class="fas fa-file" style="color: white"></i>
+          </button>
+          <div class="bText">Paper</div>
+        </div>
+        <div id="timer">3:00:00</div>
+        <div id="menu-bar" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+      <div id="subject-navigation">
+        <button id="prev-subject">Previous Subject</button>
+        <span id="current-subject">Physics</span>
+        <button id="next-subject">Next Subject</button>
+      </div>
+      <div id="question-navigation">
+        <button id="clear-button" onclick="clearSelections()">Clear</button>
+        <div class="nav-id">
+          <button id="prev-question" class="nav-btn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <button id="next-question" class="nav-btn">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- DIsplay Question function page -->
+      <div class="mainContent">
+        <div id="question-display"></div>
+        <div id="question-actions">
+          <button id="mark-button" onclick="markQuestion()">Mark</button>
+          <button id="review-button" onclick="reviewQuestion()">Review</button>
+        </div>
+        <div style="padding: 30px"></div>
+      </div>
+      <div id="sidebar">
+        <div id="sidebar-content">
+          <div class="red-btn">
+            <button class="submit-test" onclick="submitTest()">
+              Submit Test
+            </button>
+            <button id="close-sidebar" onclick="toggleSidebar()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div
+            id="test-analysis"
+            style="border-bottom: 2px solid grey; margin-bottom: 15px"
+          >
+            <div class="card">
+              <h3 style="border-bottom: 1px solid grey">Attempt Analysis</h3>
+              <p>
+                Answered:
+                <span
+                  id="attempted-count"
+                  class="count-box"
+                  style="background: #60ff60; border: 1px solid #00cd00"
+                  >0</span
+                >
+              </p>
+              <p>
+                Not Visited:
+                <span
+                  id="not-attempted-count"
+                  class="count-box"
+                  style="background-color: lightgrey; border: 1px solid grey"
+                  >0</span
+                >
+              </p>
+              <p>
+                Skipped:
+                <span
+                  id="skipped-count"
+                  class="count-box"
+                  style="
+                    background-color: rgb(231, 193, 122);
+                    border: 1px solid orange;
+                  "
+                  >0</span
+                >
+              </p>
+              <p>
+                Mark for Review:
+                <span
+                  id="reviewed-count"
+                  class="count-box"
+                  style="background: #c770ff; border: 1px solid #9d00ff"
+                  >0</span
+                >
+              </p>
+              <p>
+                Saved and Marked for Review:
+                <span
+                  id="marked-count"
+                  class="count-box"
+                  style="
+                    background: linear-gradient(to right, #e1bee7, #d4fcd4);
+                    border: 1px solid
+                      linear-gradient(to right, #d900ff, #00ff00);
+                  "
+                  >0</span
+                >
+              </p>
+            </div>
+          </div>
+          <div id="subject-tabs-container">
+            <button onclick="switchSubjectTab(0)">Physics</button>
+            <button onclick="switchSubjectTab(1)">Chemistry</button>
+            <button onclick="switchSubjectTab(2)">Maths</button>
+          </div>
+          <div id="question-boxes-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="questions-container" style="display: none"></div>
+    <button id="close-button" onclick="closeDoc()" style="display: none">
+      <i class="fas fa-times"></i>
+    </button>
+    <button id="scrollToTopBtn" onclick="scrollToTop()">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <p>Are you sure you want to submit the test?</p>
+
+        <div class="confirm">
+          <button id="confirmSubmit" onclick="confirmSubmit()">Yes</button>
+          <button id="cancelSubmit">No</button>
+        </div>
+      </div>
+    </div>
+    <div id="result-container">
+      <div class="grid-container">
+        <!-- Header -->
+        <header class="header">
+          <div class="menu-icon" onclick="dashboardSidebar()">
+            <span class="material-icons-outlined">menu</span>
+          </div>
+          <div class="header-left">
+            <span>JEE Advanced 2023 (Paper 2) </span>
+          </div>
+          <div class="header-right">
+            <span class="material-icons-outlined"
+              >account_circle <span id="user-name"></span
+            ></span>
+          </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- Sidebar -->
+        <aside id="sidebarD">
+          <div class="sidebar-title">
+            <div class="sidebar-brand">
+              <span class="material-icons-outlined">inventory</span>
+              <span style="font-size: 24px">E</span>du<span
+                style="font-size: 24px"
+                >V</span
+              >erse
+            </div>
+            <span class="material-icons-outlined" onclick="dashboardSidebar()"
+              >close</span
+            >
+          </div>
+
+          <ul class="sidebar-list">
+            <li class="sidebar-list-item" id="overviewBtn">
+              <span class="material-icons-outlined">poll</span> Overview
+            </li>
+            <li class="sidebar-list-item" id="subjectsBtn">
+              <span class="material-icons-outlined">analytics</span>
+              Subject-Wise
+            </li>
+            <li
+              class="sidebar-list-item"
+              id="solutionBtn"
+              onclick="switchToQuestionView()"
+            >
+              <span class="material-icons-outlined">assignment_turned_in</span>
+              Solutions
+            </li>
+            <li class="sidebar-list-item" id="feedbackBtn">
+              <span class="material-icons-outlined">feedback</span>
+              Feedback
+            </li>
+          </ul>
+        </aside>
+        <!-- End Sidebar -->
+        <main class="main-container-Dashboard">
+          <div id="overallAnalysis"></div>
+          <div id="subjectWiseAnalysis" style="display: none"></div>
+
+          <div id="feedback" style="display: none">
+            <!-- Content for Feedback section -->
+            <div class="containerForm">
+              <h1>Feedback Form</h1>
+              <div id="message" class="message"></div>
+              <form id="feedbackForm">
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="questionNumber">Question Number (1-90):</label>
+                  <input
+                    type="number"
+                    id="questionNumber"
+                    name="questionNumber"
+                    min="1"
+                    max="90"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="issueType">Issue Type:</label>
+                  <select id="issueType" name="issueType" required>
+                    <option value="">Select Issue Type</option>
+                    <option value="Mistake in Question">
+                      Mistake in Question
+                    </option>
+                    <option value="Mistake in Solution">
+                      Mistake in Solution
+                    </option>
+                    <option value="Exam Conduction Issue">
+                      Exam Conduction Issue
+                    </option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="questionFeedback"
+                    >Detailed Feedback on Question:</label
+                  >
+                  <textarea
+                    id="questionFeedback"
+                    name="questionFeedback"
+                    rows="4"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="solutionFeedback"
+                    >Detailed Feedback on Solution:</label
+                  >
+                  <textarea
+                    id="solutionFeedback"
+                    name="solutionFeedback"
+                    rows="4"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="examConductionFeedback"
+                    >Feedback on Exam Conduction:</label
+                  >
+                  <textarea
+                    id="examConductionFeedback"
+                    name="examConductionFeedback"
+                    rows="4"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="otherFeedback">Other Feedback:</label>
+                  <textarea
+                    id="otherFeedback"
+                    name="otherFeedback"
+                    rows="4"
+                  ></textarea>
+                </div>
+                <button type="submit" class="submitFeedBackBtn">
+                  Submit Feedback
+                </button>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div id="question-container2" style="display: none">
+      <div id="sidebar2" class="sidebar2">
+        <button class="close-btn2" onclick="closeSidebar()">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="sidebar-content2">
+          <div class="property2 correct3">
+            <h4>Correct</h4>
+            <div id="correct-questions2"></div>
+          </div>
+          <div class="property2 incorrect3">
+            <h4>Incorrect</h4>
+            <div id="incorrect-questions2"></div>
+          </div>
+          <div class="property2 not-attempted3">
+            <h4>Not Attempted</h4>
+            <div id="not-attempted-questions2"></div>
+          </div>
+          <div class="property2 marked3">
+            <h4>Marked</h4>
+            <div id="marked-questions2"></div>
+          </div>
+          <div class="property2 reviewed3">
+            <h4>Reviewed</h4>
+            <div id="reviewed-questions2"></div>
+          </div>
+          <div style="padding: 40px"></div>
+        </div>
+      </div>
+
+      <div id="question-nav2">
+        <span id="question-index2" style="display: none"></span>
+        <button
+          class="displayQuestions2"
+          onclick="switchToPerformanceAnalysis()"
+        >
+          Go Back
+        </button>
+        <div class="nav-id">
+          <button id="prev-question2"><i class="fas fa-arrow-left"></i></button>
+          <button id="next-question2">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+      <div id="question-content2">
+        <!-- Question will be dynamically inserted here -->
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
