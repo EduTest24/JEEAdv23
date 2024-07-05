@@ -4047,18 +4047,9 @@ ${
           }
         }
       } else {
-        if (question.type === "SCQ") {
                 if (optionIndex === question.correctAnswer) {
                   optionClass += " correctSol";
                 }
-              } else if (question.type === "MCQ") {
-                if (
-                  question.correctAnswer.includes(optionIndex) &&
-                  !question.userSelectedOption.includes(optionIndex)
-                ) {
-                  optionClass += " correctSol";
-                }
-              }
       }
       questionHtml += `<div class="${optionClass}"><span class="option-letter3">${
         optionLetters[optionIndex]
